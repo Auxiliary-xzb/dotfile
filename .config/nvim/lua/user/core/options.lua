@@ -50,6 +50,12 @@ vim.opt.splitright = true
 -- 光标上下两侧最少保留的屏幕行数
 vim.opt.scrolloff = 8
 
+-- 文件编码
+vim.opt.encoding = "utf-8"
+vim.opt.fileencoding = "utf-8"
+vim.opt.fileencodings = "utf-8,gbk,gb2312"
+vim.opt.fileformat = "unix"
+
 vim.opt.clipboard:append("unnamedplus")
 
 vim.g.loaded_node_provider = 0
