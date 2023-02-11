@@ -14,6 +14,7 @@ require('packer').startup({
         use {'wbthomason/packer.nvim'}
 
         use {'neovim/nvim-lspconfig'}
+        use {'williamboman/mason.nvim'}
         use {'nvim-telescope/telescope.nvim',
               tag = '0.1.1',
               requires = {

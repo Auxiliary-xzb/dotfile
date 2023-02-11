@@ -4,3 +4,4 @@
 --
 require("user.lsp.nvim-lspconfig").setup()
 require("user.lsp.nvim-cmp").setup()
+require("user.lsp.mason").setup()
