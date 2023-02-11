@@ -22,52 +22,52 @@ M.key_mappings = {
     -- cd in the direcotry under the cursor, this will change root
     -- the <CR> only open the directory without changing root
     { mode = "n", key = "o",
-      action = require("nvim-tree.api").tree.change_root_to_node,
+      action = { "tree", "change_root_to_node" },
       description = "Cd directory and change the root direcotry" },
 
     -- open file
     { mode = "n", key = "v",
-      action = require("nvim-tree.api").node.open.vertical,
+      action = { "node", "open", "vertical" },
       description = "Open file" },
 
     -- move cursor to parent directory
     { mode = "n", key = "gp",
-      action = require("nvim-tree.api").node.navigate.parent,
+      action = { "node", "navigate", "parent" },
       description = "Move cursor to parent direcotry" },
 
     -- copy absolute path to system clipbroad
     { mode = "n", key = "yy",
-      action = require("nvim-tree.api").fs.copy.absolute_path,
+      action = { "fs", "copy", "absolute_path" },
       description = "Copy absolute path to system clipbroad" },
 
     -- open file or directory with system default application
     { mode = "n", key = "S",
-      action = require("nvim-tree.api").node.run.system,
+      action = { "node", "run", "system" },
       description = "Open file or directory with system default application" },
 
     -- collapse the whole tree
     { mode = "n", key = "<C-c>",
-      action = require("nvim-tree.api").tree.collapse_all,
+      action = { "tree", "collapse_all" },
       description = "Collapse the whole tree" },
 
     -- expand all
     { mode = "n", key = "<C-o>",
-      action = require("nvim-tree.api").tree.expand_all,
+      action = { "tree", "expand_all" },
       description = "Expand the whole tree" },
 
     -- search node
     { mode = "n", key = "s",
-      action = require("nvim-tree.api").tree.search_node,
+      action = { "tree", "search_node" },
       description = "Search file node" },
 
     -- toggle a popup with file infos
     { mode = "n", key = "K",
-      action = require("nvim-tree.api").node.show_info_popup,
+      action = { "node", "show_info_popup" },
       description = "Toggle a popup with file infos" },
 
     -- toggle key mapping help
     { mode = "n", key = "h",
-      action = require("nvim-tree.api").tree.toggle_help,
+      action = { "tree", "toggle_help" },
       description = "Toggle key mapping help" },
 
     -- disable bookmark now, enable later
@@ -140,9 +140,14 @@ function M.on_attach(bufnr)
             M.plugin_name, "Disable nvim-tree default keymap")
     end
 
-    for _, values in ipairs(M.key_mappings) do
-        untils.set_keymap(values.mode, values.key, function() values.action() end, options,
-            M.plugin_name, values.description)
+    for _, value in ipairs(M.key_mappings) do
+        local action = require("nvim-tree.api")
+        -- get function
+        for _, sub_action in ipairs(value.action) do
+            action = action[sub_action]
+        end
+        untils.set_keymap(value.mode, value.key, function() action() end, options,
+            M.plugin_name, value.description)
     end
 end
 
