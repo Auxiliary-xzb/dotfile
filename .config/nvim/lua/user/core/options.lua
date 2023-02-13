@@ -50,14 +50,24 @@ vim.opt.splitright = true
 -- 光标上下两侧最少保留的屏幕行数
 vim.opt.scrolloff = 8
 
--- 文件编码
+-- 以下说明来源于mbyte.txt
+-- 1. nvim内部使用UTF-8编码，encoding选项会被设置utf—8且不可修改。
+-- 2. nvim可以编辑不同编码的文件，但是在读取该文件或写回该文件时，nvim
+--    将自动进行转码，fileencoding和encoding比对，不相同则转码。
+-- 3. fileencodings用于标识vim可识别的文件编码，当已经存在的文件被编辑
+--    时，vim会根据fileencodings列表来检测文件编码，检测通过后将fileencoding
+--    设置为已经识别到的编码，否则将该文件设置为UTF-8编码
+-- 4. 对于由vim创建的新文件而言，vim不再使用fileencodings检测，而是直接
+--    使用fileencoding来标识文件编码。
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
 vim.opt.fileencodings = "utf-8,gbk,gb2312"
 vim.opt.fileformat = "unix"
 
+-- to always use the clipboard for all operations
 vim.opt.clipboard:append("unnamedplus")
 
+-- 关闭部分插件功能。
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
