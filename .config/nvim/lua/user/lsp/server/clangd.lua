@@ -1,5 +1,3 @@
-local untils = require("user.untils")
-
 local M = {}
 
 M.plugin_name = "clangd"
@@ -54,7 +52,7 @@ function M.setup(capabilities, comm_on_attach)
         return
     end
 
-    require("lspconfig").clangd.setup({
+    require("lspconfig")[M.plugin_name].setup({
         capabilities = capabilities,
         on_attach = function(client, bufnr)
             comm_on_attach(client, bufnr)

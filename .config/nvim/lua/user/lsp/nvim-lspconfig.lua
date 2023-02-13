@@ -12,7 +12,7 @@ function M.setup(...)
     local comm_on_attach = M.on_attach
     local server_dir = vim.fn.stdpath("config") .. "/lua/user/lsp/server"
     for _, file_name in ipairs(vim.fn.readdir(server_dir)) do
-        require("user.lsp.server." .. string.gsub(file_name, ".lua", "")).setup(M.capabilities, comm_on_attach)
+        require("user.lsp.server." .. string.gsub(file_name, "%.lua", "")).setup(M.capabilities, comm_on_attach)
     end
 end
 
