@@ -14,6 +14,7 @@ M.plugin_name = "nvim-tree"
 -- r        rename
 -- x        cut file/directory to clipbroad
 -- c        copy file/direcotry to clipbroad
+-- p        paste from clipboard;
 -- y        copy name
 -- Y        relative path
 -- q        close tree window
