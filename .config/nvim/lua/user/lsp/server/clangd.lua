@@ -18,14 +18,15 @@ local function on_attach(client, bufnr_arg, format_buffer)
         M.plugin_name, "Clangd switch source and header")
 end
 
-function M.setup(capabilities, comm_on_attach, format_buffer)
+function M.setup(comm_on_attach, format_buffer)
     if not vim.fn.executable('clangd') then
         vim.notify("Can't found clangd.")
         return
     end
 
     require("lspconfig")[M.plugin_name].setup({
-        capabilities = capabilities,
+        cmd = {"clangd", "--clang-tidy", "--function-arg-placeholders",
+               "--header-insertion=iwyu", "--header-insertion-decorators"},
         on_attach = function(client, bufnr)
             comm_on_attach(client, bufnr)
             on_attach(client, bufnr, format_buffer)

@@ -9,12 +9,27 @@ function M.setup(...)
         return
     end
 
+    -- https://github.com/hrsh7th/nvim-cmp/issues/1208
+    -- 在原有的模式下会产生问题，当snippet出现时敲击Enter键却无法完成
+    -- 相应的选择项的添加，而是清除了之前的所有输入。
+    -- 引发上述问题的关键在于为lsp-server配置capabilities。此时直接使
+    -- 用cmp_nvim_lsp提供的默认值即可，但是如果想覆盖默认值，那么应该
+    -- 在setup所有的lsp-server之前修改。
     local comm_on_attach = M.on_attach
     local server_dir = vim.fn.stdpath("config") .. "/lua/user/lsp/server"
     for _, file_name in ipairs(vim.fn.readdir(server_dir)) do
         require("user.lsp.server." .. string.gsub(file_name, "%.lua", ""))
-                .setup(M.capabilities, comm_on_attach, M.format_buffer)
+               .setup(comm_on_attach, M.format_buffer)
     end
+
+    -- diagnostics to update while in insert mode
+    vim.diagnostic.config({
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        update_in_insert = true,
+        severity_sort = false,
+    })
 end
 
 function M.on_attach(client, bufnr)
@@ -36,13 +51,6 @@ function M.on_attach(client, bufnr)
 
     untils.set_keymap("n", "<C-k>", vim.lsp.buf.signature_help, bufopts,
             M.plugin_name, "Get signature help")
-end
-
-function M.get_capabilities()
-    if untils.check_require("cmp_nvim_lsp") then
-        return require("cmp_nvim_lsp").default_capabilities()
-    end
-    return nil
 end
 
 function M.format_buffer()
@@ -72,7 +80,5 @@ function M.format_buffer()
     end
   end
 end
-
-M.capabilities = M.get_capabilities()
 
 return M

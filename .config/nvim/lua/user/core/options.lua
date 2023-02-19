@@ -71,3 +71,6 @@ vim.opt.clipboard:append("unnamedplus")
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_perl_provider = 0
+
+-- 总是显示符号列，且位宽为1
+vim.opt.signcolumn = "yes:1"

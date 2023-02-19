@@ -13,12 +13,15 @@ require("user.core.autocmd")
 
 -- plugin management
 require('user.plugins')
---
+
 -- lsp
 require("user.lsp")
 
 -- normal plugins
 require("user.config")
+
+-- snippets
+require("user.snip")
 
 -- colorscheme
 require("user.colorscheme.tokyonight").setup()

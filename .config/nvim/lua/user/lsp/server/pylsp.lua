@@ -11,9 +11,8 @@ local function on_attach(client, bufnr_arg, format_buffer)
     })
 end
 
-function M.setup(capabilities, comm_on_attach, format_buffer)
+function M.setup(comm_on_attach, format_buffer)
     require("lspconfig")[M.plugin_name].setup({
-        capabilities = capabilities,
         on_attach = function(client, bufnr)
             comm_on_attach(client, bufnr)
             on_attach(client, bufnr, format_buffer)
