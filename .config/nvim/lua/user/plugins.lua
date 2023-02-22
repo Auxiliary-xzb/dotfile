@@ -13,14 +13,13 @@ require('packer').startup({
         -- Packer can manage itself
         use {'wbthomason/packer.nvim'}
 
-        use {'neovim/nvim-lspconfig'}
+        -- theme
+        use {'folke/tokyonight.nvim'}
+        use {'projekt0n/github-nvim-theme', branch = '0.0.x'}
+
+        -- language server protocol
         use {'williamboman/mason.nvim'}
-        use {'nvim-telescope/telescope.nvim',
-              tag = '0.1.1',
-              requires = {
-                'nvim-lua/plenary.nvim'
-              }
-            }
+        use {'neovim/nvim-lspconfig'}
         use {'nvim-treesitter/nvim-treesitter',
               run = function()
                   local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
@@ -28,18 +27,28 @@ require('packer').startup({
               end,
             }
 
-        use {'hrsh7th/nvim-cmp',
+        use {'nvim-telescope/telescope.nvim',
+              tag = '0.1.1',
               requires = {
-                  'hrsh7th/cmp-nvim-lsp',
-                  'L3MON4D3/LuaSnip',
-                  'saadparwaiz1/cmp_luasnip'
+                'nvim-lua/plenary.nvim'
               }
             }
 
+        -- auto complete
+        use {'hrsh7th/nvim-cmp',
+              requires = {
+                  'hrsh7th/cmp-nvim-lsp',
+                  'hrsh7th/cmp-nvim-lua',
+                  'L3MON4D3/LuaSnip',
+                  'saadparwaiz1/cmp_luasnip',
+              }
+            }
+
+        -- term
         use {'akinsho/toggleterm.nvim'}
         use {'folke/trouble.nvim'}
+
         use {'nvim-tree/nvim-tree.lua'}
-        use {'folke/tokyonight.nvim'}
         use {'nvim-lualine/lualine.nvim'}
         use {'lukas-reineke/indent-blankline.nvim'}
         use {'kyazdani42/nvim-web-devicons'}

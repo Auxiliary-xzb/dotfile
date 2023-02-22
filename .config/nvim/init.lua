@@ -14,6 +14,9 @@ require("user.core.autocmd")
 -- plugin management
 require('user.plugins')
 
+-- setup colorscheme before other plugin
+require("user.colorscheme")
+
 -- lsp
 require("user.lsp")
 
@@ -23,6 +26,4 @@ require("user.config")
 -- snippets
 require("user.snip")
 
--- colorscheme
-require("user.colorscheme.tokyonight").setup()
 
