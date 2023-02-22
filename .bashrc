@@ -116,11 +116,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if type cmake > /dev/null 2&>1; then
+if type cmake > /dev/null 2>&1; then
     alias cmake_build='cmake -S . -B build && cmake --build build'
 fi
 
-if type nvim > /dev/null 2&>1; then
+if type nvim > /dev/null 2>&1; then
     alias vim='nvim'
     alias vi='nvim'
 fi
