@@ -18,7 +18,10 @@ function M.setup(...)
     cmp.setup({
       snippet = M.get_snippet(cmp),
       mapping = M.get_mapping(cmp, luasnip),
-      sources = M.get_sources(cmp)
+      sources = M.get_sources(cmp),
+      completion = {
+          keyword_length = 3,
+      },
     })
 end
 

@@ -116,10 +116,16 @@ if ! shopt -oq posix; then
   fi
 fi
 
+if type cmake > /dev/null 2&>1; then
+    alias cmake_build='cmake -S . -B build && cmake --build build'
+fi
+
+if type nvim > /dev/null 2&>1; then
+    alias vim='nvim'
+    alias vi='nvim'
+fi
+
 export PS1='\[\e[33m\]\w\[\e[35m\]$(__git_ps1 " (%s)")\[\e[0m\] > \n'
-alias vim='nvim'
-alias vi='nvim'
-alias cmake_build='cmake -S . -B build && cmake --build build'
 
 export XMODIFIERS=@im=fcitx
 export GTK_IM_MODULE=fcitx
