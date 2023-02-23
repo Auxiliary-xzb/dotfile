@@ -5,52 +5,52 @@ local M = {}
 M.plugin_name = "nvim-lspconfig"
 
 function M.setup(...)
-    if untils.check_require("lspconfig") == false then
-        return
-    end
+  if untils.check_require("lspconfig") == false then
+    return
+  end
 
-    -- https://github.com/hrsh7th/nvim-cmp/issues/1208
-    -- 在原有的模式下会产生问题，当snippet出现时敲击Enter键却无法完成
-    -- 相应的选择项的添加，而是清除了之前的所有输入。
-    -- 引发上述问题的关键在于为lsp-server配置capabilities。此时直接使
-    -- 用cmp_nvim_lsp提供的默认值即可，但是如果想覆盖默认值，那么应该
-    -- 在setup所有的lsp-server之前修改。
-    local comm_on_attach = M.on_attach
-    local server_dir = vim.fn.stdpath("config") .. "/lua/user/lsp/server"
-    for _, file_name in ipairs(vim.fn.readdir(server_dir)) do
-        require("user.lsp.server." .. string.gsub(file_name, "%.lua", ""))
-               .setup(comm_on_attach, M.format_buffer)
-    end
+  -- https://github.com/hrsh7th/nvim-cmp/issues/1208
+  -- 在原有的模式下会产生问题，当snippet出现时敲击Enter键却无法完成
+  -- 相应的选择项的添加，而是清除了之前的所有输入。
+  -- 引发上述问题的关键在于为lsp-server配置capabilities。此时直接使
+  -- 用cmp_nvim_lsp提供的默认值即可，但是如果想覆盖默认值，那么应该
+  -- 在setup所有的lsp-server之前修改。
+  local comm_on_attach = M.on_attach
+  local server_dir = vim.fn.stdpath("config") .. "/lua/user/lsp/server"
+  for _, file_name in ipairs(vim.fn.readdir(server_dir)) do
+    require("user.lsp.server." .. string.gsub(file_name, "%.lua", ""))
+    .setup(comm_on_attach, M.format_buffer)
+  end
 
-    -- diagnostics to update while in insert mode
-    vim.diagnostic.config({
-        virtual_text = true,
-        signs = true,
-        underline = true,
-        -- update_in_insert = true,
-        severity_sort = false,
-    })
+  -- diagnostics to update while in insert mode
+  vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    -- update_in_insert = true,
+    severity_sort = false,
+  })
 end
 
 function M.on_attach(client, bufnr)
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    untils.set_keymap("n", "gD", vim.lsp.buf.declaration, bufopts,
-        M.plugin_name, "Goto declaration")
-    untils.set_keymap("n", "gd", vim.lsp.buf.definition, bufopts,
-        M.plugin_name, "Goto definition")
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  untils.set_keymap("n", "gD", vim.lsp.buf.declaration, bufopts,
+  M.plugin_name, "Goto declaration")
+  untils.set_keymap("n", "gd", vim.lsp.buf.definition, bufopts,
+  M.plugin_name, "Goto definition")
 
-    if client.server_capabilities.hoverProvider then
-        untils.set_keymap("n", "K", vim.lsp.buf.hover, bufopts,
-            M.plugin_name, "Get hover")
-    end
+  if client.server_capabilities.hoverProvider then
+    untils.set_keymap("n", "K", vim.lsp.buf.hover, bufopts,
+    M.plugin_name, "Get hover")
+  end
 
-    if client.server_capabilities.implementationProvider then
-        untils.set_keymap("n", "gi", vim.lsp.buf.implementation, bufopts,
-            M.plugin_name, "Do implementation")
-    end
+  if client.server_capabilities.implementationProvider then
+    untils.set_keymap("n", "gi", vim.lsp.buf.implementation, bufopts,
+    M.plugin_name, "Do implementation")
+  end
 
-    untils.set_keymap("n", "<C-k>", vim.lsp.buf.signature_help, bufopts,
-            M.plugin_name, "Get signature help")
+  untils.set_keymap("n", "<C-k>", vim.lsp.buf.signature_help, bufopts,
+  M.plugin_name, "Get signature help")
 end
 
 function M.format_buffer()

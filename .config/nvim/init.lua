@@ -1,9 +1,9 @@
 -- disable netrw if other plugin installed
 local untils = require("user.untils")
 if untils.whether_disable_netrw() == true then
-    -- disable netrw
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
+  -- disable netrw
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
 end
 
 -- basic option setting
