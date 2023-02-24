@@ -103,6 +103,15 @@ function M.setup(...)
     -- indicate which file have unsaved modification
     modified = { enable = true },
 
+    -- git
+    git  = {
+       -- Enable / disable the feature
+       enable = true,
+
+       -- ignore files based on .gitignore
+       ignore = false,
+    },
+
     -- ui
     renderer = {
       -- appends a trailing slash to folder names
