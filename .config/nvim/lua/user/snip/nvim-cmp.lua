@@ -9,30 +9,44 @@ function M.setup(...)
     return
   end
 
-  local luasnip = nil
-  local cmp = require("cmp")
-  if untils.check_require("luasnip") then
-    luasnip = require("luasnip")
+  if untils.check_require("luasnip") == false then
+    return
   end
 
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
   cmp.setup({
-    snippet = M.get_snippet(cmp),
-    mapping = M.get_mapping(cmp, luasnip),
-    sources = M.get_sources(cmp),
+    window = {
+      completion = {
+        -- nvim_open_win使用的windows样式
+        border = "rounded",
+
+        -- 不显示scrollbar
+        scrollbar = false,
+      },
+      documentation = {
+        border = "rounded",
+      },
+    },
     completion = {
       keyword_length = 3,
     },
-  })
-end
+    formatting = {
+      -- :help complete-items
+      fields = {"abbr", "kind"},
 
-function M.get_snippet(cmp)
-  return {
-    expand = function(args)
-      if M.luasnip then
-        M.luasnip.lsp_expand(args.body)
-      end
-    end,
-  }
+      -- expand ~
+      expandable_indicator = false,
+    },
+    snippet = {
+      expand = function(args)
+        require("luasnip").lsp_expand(args.body)
+      end,
+    },
+
+    mapping = M.get_mapping(cmp, luasnip),
+    sources = M.get_sources(cmp),
+  })
 end
 
 function M.get_sources(cmp)

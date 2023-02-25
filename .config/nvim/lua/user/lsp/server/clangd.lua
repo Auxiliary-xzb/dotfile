@@ -25,8 +25,11 @@ function M.setup(comm_on_attach, format_buffer)
   end
 
   require("lspconfig")[M.plugin_name].setup({
-    cmd = {"clangd", "--function-arg-placeholders=false",
-    "--header-insertion=iwyu", "--header-insertion-decorators",
+    cmd = {"clangd",
+    "--function-arg-placeholders=true",
+    "--header-insertion=iwyu",
+    "--header-insertion-decorators",
+    "--completion-style=detailed",
     "--clang-tidy",
     "--clang-tidy-checks=cppcoreguidelines-*,performance-*,bugprone-*,portability-*, modernze-*,google-*" },
     on_attach = function(client, bufnr)

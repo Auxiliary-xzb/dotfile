@@ -74,3 +74,6 @@ vim.g.loaded_perl_provider = 0
 
 -- 总是显示符号列，且位宽为1
 vim.opt.signcolumn = "yes:1"
+
+-- 所有的popmenu的最大高度为10行
+vim.opt.pumheight = 10

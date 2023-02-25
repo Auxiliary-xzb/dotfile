@@ -14,8 +14,6 @@ function M.setup(...)
   -- vim.opt.listchars:append "eol:↴"
 
   require("indent_blankline").setup({
-    theme = vim.g.colors_name,
-
     -- specifies the character to be used as indent char
     char = "┆",
 

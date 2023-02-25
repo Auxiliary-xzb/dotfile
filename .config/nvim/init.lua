@@ -25,5 +25,3 @@ require("user.config")
 
 -- snippets
 require("user.snip")
-
-

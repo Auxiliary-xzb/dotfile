@@ -22,9 +22,6 @@ function M.setup(...)
 
     -- open in float
     direction = "float",
-
-    -- theme
-    theme = vim.g.colors_name
   })
 end
 

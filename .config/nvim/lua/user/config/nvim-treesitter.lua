@@ -8,8 +8,6 @@ function M.setup(...)
   end
 
   require("nvim-treesitter.configs").setup({
-    theme = vim.g.colors_name,
-
     -- A list parser names
     ensure_installed = {"bash", "c", "cmake", "cpp", "diff", "dot",
     "git_rebase", "gitattributes", "gitcommit", "gitignore",

@@ -9,9 +9,7 @@ function M.setup(...)
     return
   end
 
-  require("telescope").setup({
-    theme = vim.g.colors_name,
-  })
+  require("telescope").setup()
 end
 
 return M
