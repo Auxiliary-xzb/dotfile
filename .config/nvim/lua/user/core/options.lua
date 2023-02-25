@@ -1,8 +1,8 @@
 -- 仅使用空格模式, 不替换<Tab>的实际长度，替换其他涉及<Tab>的动作使用的长度
 -- 仅控制新创建文件，保持旧文件的tab长度，仅将其替换为空白。
 vim.opt.expandtab = true
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- 设置显示行号, 显示相对行号
 vim.opt.number = true

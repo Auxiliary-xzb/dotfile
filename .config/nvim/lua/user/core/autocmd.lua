@@ -16,16 +16,17 @@ vim.api.nvim_create_autocmd('BufWrite', {
 -- fileTypeGroup --
 local fileTypeGroup = vim.api.nvim_create_augroup('FileTypeDetect', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {"*.c", "*.h", "*.cc", "*.cpp", "*.hpp"},
+  pattern = {"c", "cpp"},
   group = fileTypeGroup,
-  callback = function()
-    -- 输入闭合括号时短暂跳转到匹配处
-    vim.opt_local.showmatch = true
-    -- 保持之间0.5ms
-    vim.opt_local.matchtime = 5
-    vim.opt_local.foldmethod = 'syntax'
-    vim.opt_local.foldcolumn = 1
-    vim.opt_local.foldlevel = 999
+  callback = function(info)
+    -- 按照语法折叠，且默认展开所有折叠。
+    local winid = vim.api.nvim_get_current_win()
+    vim.wo[winid].foldmethod = "syntax"
+    vim.wo[winid].foldlevel = 999
+
+    -- tab的宽度为2
+    vim.api.nvim_buf_set_option(info.buf, "softtabstop", 2)
+    vim.api.nvim_buf_set_option(info.buf, "shiftwidth", 2)
   end
 })
 
