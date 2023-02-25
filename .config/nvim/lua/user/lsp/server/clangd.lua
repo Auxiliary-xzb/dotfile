@@ -13,7 +13,7 @@ local function on_attach(client, bufnr_arg, format_buffer)
         end,
     })
 
-    local options = { noremap = true, silent = true, }
+    local options = { noremap = true, silent = true, buffer = bufnr_arg, }
     untils.set_keymap("n", "<F4>",
                       function() vim.cmd("ClangdSwitchSourceHeader") end, options,
                       M.plugin_name, "Clangd switch source and header")

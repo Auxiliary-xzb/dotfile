@@ -25,7 +25,7 @@ function M.check_require(plugin_names)
 end
 
 function M.get_failed_loaded_list()
-    vim.notify(table.concat(M.failed_loaded, ", "))
+    print(vim.inspect(table.concat(M.failed_loaded, ", ")))
 end
 
 function M.whether_disable_netrw()
@@ -42,7 +42,7 @@ end
 
 function M.set_keymap(mode, key, action, options, plugin, action_description)
     for _, value in ipairs(M.key_mappings) do
-        if value.key_name == key_name then
+        if value.key_name == key then
             vim.notify("Key had registed by (" ..
             value.plugin_name .. ") plugin.")
             return
@@ -60,7 +60,6 @@ function M.set_keymap(mode, key, action, options, plugin, action_description)
 end
 
 function M.get_keymap()
-    require("plenary.window.float").centered()
     print(vim.inspect(M.key_mappings))
 end
 
