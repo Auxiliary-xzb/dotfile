@@ -53,7 +53,8 @@ function M.get_sources(cmp)
   return cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "luasnip" },
-    { name = "nvim_lua" }
+    { name = "nvim_lua" },
+    { name = "nvim_lsp_signature_help" }
   })
 end
 
