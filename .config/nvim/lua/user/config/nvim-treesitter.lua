@@ -2,6 +2,8 @@ local untils = require("user.untils")
 
 local M = {}
 
+M.disable_highlight = { "cmake" }
+
 function M.setup(...)
     if untils.check_require("nvim-treesitter") == false then
         return
@@ -20,11 +22,15 @@ function M.setup(...)
             -- 'false' will disable the whole extension
             enable = true,
 
-            disable = { "cmake" },
-
             -- use function for more flexibility
             -- disable slow treesitter highlight for large file
             disable = function(lang, buf)
+                for _, module_name in ipairs(M.disable_highlight) do
+                    if lang == module_name then
+                        return true
+                    end
+                end
+
                 local max_filesize = 1024 * 1024
                 local ok, stats = pcall(vim.loop.fs_stat,
                                         vim.api.nvim_buf_get_name(buf))
