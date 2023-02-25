@@ -13,10 +13,10 @@ vim.opt.relativenumber = true
 vim.opt.list = true
 vim.opt.wrap = false
 vim.opt.sidescroll = 10
-vim.opt.listchars= { precedes = '<', extends = '>' }
+vim.opt.listchars = { precedes = "<", extends = ">" }
 
 -- 光标可以移动至空白处
-vim.opt.virtualedit = {'onemore', 'insert'}
+vim.opt.virtualedit = { "onemore", "insert" }
 
 -- 设置不启用备份文件，临时文件，撤销文件
 vim.opt.backup = false
@@ -38,7 +38,7 @@ vim.opt.cmdheight = 2
 vim.opt.hidden = true
 
 -- 设置折叠的默认方式
-vim.opt.foldmethod = 'indent'
+vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 999
 
 -- 显示当前正在编辑的行
