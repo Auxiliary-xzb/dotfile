@@ -20,8 +20,11 @@ require("packer").startup({
         use { "projekt0n/github-nvim-theme", branch = "0.0.x" }
 
         -- language server protocol
-        use { "williamboman/mason.nvim" }
         use { "neovim/nvim-lspconfig" }
+        -- 便捷管理与安装lsp、dap等
+        use { "williamboman/mason.nvim" }
+        -- 快速配置lua-language-server
+        use { "folke/neodev.nvim" }
         use { "nvim-treesitter/nvim-treesitter",
             run = function()
                 local ts_update = require("nvim-treesitter.install").update({
@@ -29,7 +32,6 @@ require("packer").startup({
                 ts_update()
             end,
         }
-        use { "folke/neodev.nvim" }
 
         use { "nvim-telescope/telescope.nvim",
             tag = "0.1.1",
@@ -57,6 +59,10 @@ require("packer").startup({
         use { "nvim-lualine/lualine.nvim" }
         use { "lukas-reineke/indent-blankline.nvim" }
         use { "kyazdani42/nvim-web-devicons" }
+
+        -- 还未配置的插件
+        use { "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }
+        use { "kylechui/nvim-surround" }
 
         if check_packer() then
             require("packer").sync()
