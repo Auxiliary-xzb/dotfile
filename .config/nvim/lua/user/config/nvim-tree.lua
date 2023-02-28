@@ -58,7 +58,7 @@ function M.setup(...)
     end
 
     require("nvim-tree").setup({
-        on_attac = M.on_attach,
+        on_attach = M.on_attach,
         disable_netrw = true,
         -- replace unnamed buffer
         hijack_unnamed_buffer_when_opening = true,
