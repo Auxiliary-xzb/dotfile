@@ -55,6 +55,7 @@ require("packer").startup({
         use { "akinsho/toggleterm.nvim" }
         use { "folke/trouble.nvim" }
 
+        use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
         use { "nvim-tree/nvim-tree.lua" }
         use { "nvim-lualine/lualine.nvim" }
         use { "lukas-reineke/indent-blankline.nvim" }

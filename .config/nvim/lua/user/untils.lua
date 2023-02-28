@@ -40,7 +40,7 @@ function M.whether_disable_netrw()
     return false
 end
 
-function M.set_keymap(mode, key, action, options, plugin, action_description)
+function M.set_keymap(mode, key, action, options, plugin)
     for _, value in ipairs(M.key_mappings) do
         if value.key_name == key then
             vim.notify("Key had registed by (" ..
@@ -51,7 +51,7 @@ function M.set_keymap(mode, key, action, options, plugin, action_description)
 
     vim.keymap.set(mode, key, action, options)
 
-    local value = { key_name = key, description = action_description, }
+    local value = { key_name = key, }
     if M.key_mappings[plugin] == nil then
         M.key_mappings[plugin] = { value, }
     else

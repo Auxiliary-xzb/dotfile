@@ -1,4 +1,4 @@
-local alias = require("user.snip.snippets")
+local alias = require("user.completion.snippets")
 
 local M = {}
 

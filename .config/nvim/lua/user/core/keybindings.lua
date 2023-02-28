@@ -17,5 +17,4 @@ function open_help_on_new_tab()
     end
 end
 
-vim.cmd(
-    "command! ClearReg for i in range(34, 122) | slient! call setreg(nr2char(i), []) | endfor")
+vim.cmd("command! ClearReg for i in range(34, 122) | slient! call setreg(nr2char(i), []) | endfor")

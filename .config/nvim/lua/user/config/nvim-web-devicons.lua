@@ -9,10 +9,10 @@ function M.setup(...)
         return
     end
 
-    require("nvim-web-devicons").setup {
+    require("nvim-web-devicons").setup({
         color_icons = true,
         default = true,
-    }
+    })
 end
 
 return M

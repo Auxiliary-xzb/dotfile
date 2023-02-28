@@ -9,7 +9,7 @@ function M.setup(...)
         return
     end
 
-    require("lualine").setup {
+    require("lualine").setup{
         options = {
             -- theme
             theme = vim.g.colors_name,

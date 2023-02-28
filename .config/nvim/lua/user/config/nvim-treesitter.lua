@@ -24,7 +24,7 @@ function M.setup(...)
 
             -- use function for more flexibility
             -- disable slow treesitter highlight for large file
-            disable = function(lang, buf)
+            disable = function (lang, buf)
                 for _, module_name in ipairs(M.disable_highlight) do
                     if lang == module_name then
                         return true
@@ -33,7 +33,7 @@ function M.setup(...)
 
                 local max_filesize = 1024 * 1024
                 local ok, stats = pcall(vim.loop.fs_stat,
-                                        vim.api.nvim_buf_get_name(buf))
+                    vim.api.nvim_buf_get_name(buf))
                 if ok and stats and stats.size > max_filesize then
                     return true
                 end
@@ -50,7 +50,7 @@ function M.setup(...)
     vim.api.nvim_create_autocmd(
         { "BufEnter", "BufAdd", "BufNew", "BufNewFile", "BufWinEnter" }, {
         group = vim.api.nvim_create_augroup("TS_FOLD_WORKAROUND", {}),
-        callback = function()
+        callback = function ()
             vim.opt_local.foldmethod = "expr"
             vim.opt_local.foldexpr   = "nvim_treesitter#foldexpr()"
         end,

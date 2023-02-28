@@ -21,10 +21,12 @@ function M.setup(...)
         -- auto_close = true,
     })
 
-    local options = { noremap = true, silent = true, }
-    untils.set_keymap("n", "<F3>", function() vim.cmd("TroubleToggle") end,
-                      options,
-                      M.plugin_name, "Toggle trouble")
+    local options = {
+        noremap = true,
+        silent = true,
+        desc = "Toggle trouble"
+    }
+    untils.set_keymap("n", "<F3>", function () vim.cmd("TroubleToggle") end, options, M.plugin_name)
 end
 
 return M

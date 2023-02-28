@@ -33,24 +33,31 @@ function M.setup(...)
 end
 
 function M.on_attach(client, bufnr)
-    local bufopts = { noremap = true, silent = true, buffer = bufnr, }
-    untils.set_keymap("n", "gD", vim.lsp.buf.declaration, bufopts,
-                      M.plugin_name, "Goto declaration")
-    untils.set_keymap("n", "gd", vim.lsp.buf.definition, bufopts,
-                      M.plugin_name, "Goto definition")
+    local bufopts = {
+        noremap = true,
+        silent = true,
+        buffer = bufnr,
+        desc = ""
+    }
 
+    bufopts.desc = "Goto declaration"
+    untils.set_keymap("n", "gD", vim.lsp.buf.declaration, bufopts, M.plugin_name)
+
+    bufopts.desc = "Goto definition"
+    untils.set_keymap("n", "gd", vim.lsp.buf.definition, bufopts, M.plugin_name)
+
+    bufopts.desc = "Get hover"
     if client.server_capabilities.hoverProvider then
-        untils.set_keymap("n", "K", vim.lsp.buf.hover, bufopts,
-                          M.plugin_name, "Get hover")
+        untils.set_keymap("n", "K", vim.lsp.buf.hover, bufopts, M.plugin_name)
     end
 
+    bufopts.desc = "Do implementation"
     if client.server_capabilities.implementationProvider then
-        untils.set_keymap("n", "gi", vim.lsp.buf.implementation, bufopts,
-                          M.plugin_name, "Do implementation")
+        untils.set_keymap("n", "gi", vim.lsp.buf.implementation, bufopts, M.plugin_name)
     end
 
-    untils.set_keymap("n", "<C-k>", vim.lsp.buf.signature_help, bufopts,
-                      M.plugin_name, "Get signature help")
+    bufopts.desc = "Get signature help"
+    untils.set_keymap("n", "<C-k>", vim.lsp.buf.signature_help, bufopts, M.plugin_name)
 end
 
 function M.format_buffer()

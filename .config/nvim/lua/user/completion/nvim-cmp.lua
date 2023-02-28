@@ -39,7 +39,7 @@ function M.setup(...)
             expandable_indicator = false,
         },
         snippet = {
-            expand = function(args)
+            expand = function (args)
                 require("luasnip").lsp_expand(args.body)
             end,
         },
@@ -65,7 +65,7 @@ function M.get_mapping(cmp, luasnip)
         ["<CR>"] = cmp.mapping.confirm({
             select = true,
         }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<Tab>"] = cmp.mapping(function (fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip and luasnip.expand_or_jumpable() then
@@ -73,8 +73,8 @@ function M.get_mapping(cmp, luasnip)
             else
                 fallback()
             end
-        end,                    { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function (fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip and luasnip.jumpable( -1) then
@@ -82,7 +82,7 @@ function M.get_mapping(cmp, luasnip)
             else
                 fallback()
             end
-        end,                      { "i", "s" }),
+        end, { "i", "s" }),
     })
 end
 

@@ -12,8 +12,7 @@ function M.setup(...)
     local snip_dir = vim.fn.stdpath("config") .. "/lua/user/snip/snippets"
     for _, file_name in ipairs(vim.fn.readdir(snip_dir)) do
         if file_name ~= "init.lua" then
-            require("user.snip.snippets." .. string.gsub(file_name, "%.lua", ""))
-                .setup()
+            require("user.snip.snippets." .. string.gsub(file_name, "%.lua", "")).setup()
         end
     end
 end
