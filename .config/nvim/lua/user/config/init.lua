@@ -1,13 +1,14 @@
 local plugins = {
     ["init"] = false,
+    ["nvim-web-devicons"] = true,
     ["indent-blankline"] = true,
     ["lualine"] = true,
     ["nvim-telescope"] = true,
     ["nvim-tree"] = true,
     ["nvim-treesitter"] = true,
-    ["nvim-web-devicons"] = true,
     ["trouble"] = true,
     ["toggleterm"] = true,
+    ["todo-comments"] = true,
 }
 
 local config_dir = vim.fn.stdpath("config") .. "/lua/user/config"
