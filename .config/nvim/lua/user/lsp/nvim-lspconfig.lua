@@ -10,16 +10,15 @@ function M.setup(...)
     end
 
     -- https://github.com/hrsh7th/nvim-cmp/issues/1208
-    -- 在原有的模式下会产生问题，当snippet出现时敲击Enter键却无法完成
-    -- 相应的选择项的添加，而是清除了之前的所有输入。
-    -- 引发上述问题的关键在于为lsp-server配置capabilities。此时直接使
-    -- 用cmp_nvim_lsp提供的默认值即可，但是如果想覆盖默认值，那么应该
-    -- 在setup所有的lsp-server之前修改。
+    -- 在原有的模式下会产生问题，当snippet出现时敲击Enter键却无法完成相应的选择项
+    -- 的添加，而是清除了之前的所有输入。引发上述问题的关键在于为lsp-server配置
+    -- capabilities。所有的capabilities的获取操作应该在setup所有的lsp-server之前。
+    -- 所以这里直接放在所有的lsp-server的配置中(不能将capabilities放在函数里，否则
+    -- 会出现该问题)
     local comm_on_attach = M.on_attach
     local server_dir = vim.fn.stdpath("config") .. "/lua/user/lsp/server"
     for _, file_name in ipairs(vim.fn.readdir(server_dir)) do
-        require("user.lsp.server." .. string.gsub(file_name, "%.lua", ""))
-            .setup(comm_on_attach, M.format_buffer)
+        require("user.lsp.server." .. string.gsub(file_name, "%.lua", "")).setup(comm_on_attach, M.format_buffer)
     end
 
     -- diagnostics to update while in insert mode
@@ -72,17 +71,14 @@ function M.format_buffer()
     -- the same buffer
     for _, window in ipairs(windows) do
         local line, col = unpack(vim.api.nvim_win_get_cursor(window))
-        marks[window] = vim.api.nvim_buf_set_extmark(bufnr, format_mark_ns,
-                                                     line - 1, col, {})
+        marks[window] = vim.api.nvim_buf_set_extmark(bufnr, format_mark_ns, line - 1, col, {})
     end
 
     vim.lsp.buf.format({ bufnr = bufnr, async = false, })
 
     for _, window in ipairs(windows) do
         local mark = marks[window]
-        local line, col = unpack(vim.api.nvim_buf_get_extmark_by_id(bufnr,
-                                                                    format_mark_ns,
-                                                                    mark, {}))
+        local line, col = unpack(vim.api.nvim_buf_get_extmark_by_id(bufnr, format_mark_ns, mark, {}))
         local max_line_index = vim.api.nvim_buf_line_count(bufnr) - 1
 
         if line and col and line <= max_line_index then

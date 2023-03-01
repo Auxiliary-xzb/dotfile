@@ -17,11 +17,15 @@ function M.setup(comm_on_attach, format_buffer)
         return
     end
 
+    -- 见nvim-lspconfig.lua
+    local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     require("lspconfig")[M.plugin_name].setup({
         on_attach = function (client, bufnr)
             comm_on_attach(client, bufnr)
             on_attach(client, bufnr, format_buffer)
         end,
+        capabilities = capabilities,
         settings = {
             Lua = {
                 completion = {

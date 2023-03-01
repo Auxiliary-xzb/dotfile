@@ -1,6 +1,6 @@
 local untils = require("user.untils")
 
-M = {}
+local M = {}
 
 M.plugin_name = "todo-comments"
 
