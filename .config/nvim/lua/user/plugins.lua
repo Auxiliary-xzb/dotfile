@@ -1,4 +1,4 @@
-local check_packer = function()
+local check_packer = function ()
     local install_path = vim.fn.stdpath("data") ..
         "/site/pack/packer/start/packer.nvim"
     if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -11,29 +11,29 @@ local check_packer = function()
 end
 
 require("packer").startup({
-    function(use)
+    function (use)
         -- Packer can manage itself
-        use { "wbthomason/packer.nvim" }
+        use{ "wbthomason/packer.nvim" }
 
         -- theme
-        use { "folke/tokyonight.nvim" }
-        use { "projekt0n/github-nvim-theme", branch = "0.0.x" }
+        use{ "folke/tokyonight.nvim" }
+        use{ "projekt0n/github-nvim-theme", branch = "0.0.x" }
 
         -- language server protocol
-        use { "neovim/nvim-lspconfig" }
+        use{ "neovim/nvim-lspconfig" }
         -- 便捷管理与安装lsp、dap等
-        use { "williamboman/mason.nvim" }
+        use{ "williamboman/mason.nvim" }
         -- 快速配置lua-language-server
-        use { "folke/neodev.nvim" }
-        use { "nvim-treesitter/nvim-treesitter",
-            run = function()
+        use{ "folke/neodev.nvim" }
+        use{ "nvim-treesitter/nvim-treesitter",
+            run = function ()
                 local ts_update = require("nvim-treesitter.install").update({
                     with_sync = true, })
                 ts_update()
             end,
         }
 
-        use { "nvim-telescope/telescope.nvim",
+        use{ "nvim-telescope/telescope.nvim",
             tag = "0.1.1",
             requires = {
                 "nvim-lua/plenary.nvim"
@@ -41,7 +41,7 @@ require("packer").startup({
         }
 
         -- auto complete
-        use { "hrsh7th/nvim-cmp",
+        use{ "hrsh7th/nvim-cmp",
             requires = {
                 "hrsh7th/cmp-nvim-lsp",
                 "hrsh7th/cmp-nvim-lua",
@@ -52,18 +52,19 @@ require("packer").startup({
         }
 
         -- term
-        use { "akinsho/toggleterm.nvim" }
-        use { "folke/trouble.nvim" }
+        use{ "akinsho/toggleterm.nvim" }
+        use{ "folke/trouble.nvim" }
 
-        use { "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
-        use { "nvim-tree/nvim-tree.lua" }
-        use { "nvim-lualine/lualine.nvim" }
-        use { "lukas-reineke/indent-blankline.nvim" }
-        use { "kyazdani42/nvim-web-devicons" }
+        use{ "windwp/nvim-autopairs" }
+        use{ "folke/todo-comments.nvim", requires = "nvim-lua/plenary.nvim" }
+        use{ "nvim-tree/nvim-tree.lua" }
+        use{ "nvim-lualine/lualine.nvim" }
+        use{ "lukas-reineke/indent-blankline.nvim" }
+        use{ "kyazdani42/nvim-web-devicons" }
 
         -- 还未配置的插件
-        use { "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }
-        use { "kylechui/nvim-surround" }
+        use{ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }
+        use{ "kylechui/nvim-surround" }
 
         if check_packer() then
             require("packer").sync()
