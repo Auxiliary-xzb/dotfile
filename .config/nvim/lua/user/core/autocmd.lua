@@ -29,3 +29,24 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_buf_set_option(info.buf, "shiftwidth", 2)
     end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "text",
+    group = fileTypeGroup,
+    callback = function (info)
+        -- 关闭所有的自动换行
+        vim.api.nvim_buf_set_option(info.buf, "autoindent", false)
+        vim.api.nvim_buf_set_option(info.buf, "smartindent", false)
+        vim.api.nvim_buf_set_option(info.buf, "cindent", false)
+        vim.api.nvim_buf_set_option(info.buf, "indentexpr", false)
+    end,
+})
+
+-- TODO: 将help放置在独立的window/tab中打开。
+--  vim.api.nvim_create_autocmd("FileType", {
+--      pattern = "help",
+--      group = fileTypeGroup,
+--      callback = function (info)
+--
+--      end,
+--  })

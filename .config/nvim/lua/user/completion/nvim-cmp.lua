@@ -28,9 +28,6 @@ function M.setup(...)
                 border = "rounded",
             },
         },
-        completion = {
-            keyword_length = 3,
-        },
         formatting = {
             -- :help complete-items
             fields = { "abbr", "kind" },
