@@ -40,46 +40,10 @@ function M.whether_disable_netrw()
 end
 
 function M.set_keymap(mode, key, action, options, plugin)
-    for _, value in ipairs(M.key_mappings) do
-        if value.key == key then
-            vim.notify("Key had registed by (" .. value.plugin .. ") plugin.")
-            return
-        end
-    end
-
     vim.keymap.set(mode, key, action, options)
 
     local value = { plugin = plugin, key = key, desc = options.desc, }
     table.insert(M.key_mappings, value)
-end
-
-function M.get_keymap()
-    -- print(vim.inspect(M.key_mappings))
-
-    local ret = {}
-    for _, x in ipairs(M.key_mappings) do
-        local value = string.format("%-10s  %-5s  %s", x.plugin, x.key, x.desc)
-        table.insert(ret, value)
-    end
-    return ret
-end
-
-function M.show_float()
-    local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buf, 0, -1, true, M.get_keymap())
-    local win = vim.api.nvim_open_win(buf, true,
-        {
-            relative = "editor",
-            width = 80,
-            height = 20,
-            col = 0,
-            row = 2,
-            anchor = "NW",
-            style = "minimal",
-            border = "rounded",
-            title = "User define keymappings",
-            title_pos = "center",
-        })
 end
 
 return M

@@ -18,6 +18,7 @@ local fileTypeGroup = vim.api.nvim_create_augroup("FileTypeDetect", { clear = tr
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "c", "cpp" },
     group = fileTypeGroup,
+    desc = "Normal setting for C/C++ files",
     callback = function (info)
         -- 按照语法折叠，且默认展开所有折叠。
         local winid = vim.api.nvim_get_current_win()
@@ -33,6 +34,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "text",
     group = fileTypeGroup,
+    desc = "Normal setting for plain text files",
     callback = function (info)
         -- 关闭所有的自动换行
         vim.api.nvim_buf_set_option(info.buf, "autoindent", false)
@@ -42,11 +44,4 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- TODO: 将help放置在独立的window/tab中打开。
---  vim.api.nvim_create_autocmd("FileType", {
---      pattern = "help",
---      group = fileTypeGroup,
---      callback = function (info)
---
---      end,
---  })
+-- TODO: 将help放置在独立的tab中打开。

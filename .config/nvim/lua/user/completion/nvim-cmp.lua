@@ -4,6 +4,13 @@ local M = {}
 
 M.plugin_name = "nvim-cmp"
 
+M.sources_names = {
+    nvim_lsp = "[LSP]",
+    luasnip = "[Snippet]",
+    nvim_lua = "[Lua]",
+    nvim_lsp_signature_help = "[Signature]",
+}
+
 function M.setup(...)
     if untils.check_require("cmp") == false then
         return
@@ -30,10 +37,16 @@ function M.setup(...)
         },
         formatting = {
             -- :help complete-items
-            fields = { "abbr", "kind" },
+            fields = { "abbr", "kind", "menu" },
 
             -- expand ~
-            expandable_indicator = false,
+            expandable_indicator = true,
+
+            -- format
+            format = function (entry, vim_item)
+                vim_item.menu = M.sources_names[entry.source.name]
+                return vim_item
+            end,
         },
         snippet = {
             expand = function (args)
