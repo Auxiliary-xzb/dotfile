@@ -35,18 +35,28 @@ function M.setup(...)
                 border = "rounded",
             },
         },
+        completion = {
+            keyword_length = 1,
+        },
         formatting = {
             -- :help complete-items
             fields = { "abbr", "kind", "menu" },
 
             -- expand ~
-            expandable_indicator = true,
+            expandable_indicator = false,
 
             -- format
             format = function (entry, vim_item)
                 vim_item.menu = M.sources_names[entry.source.name]
                 return vim_item
             end,
+        },
+        matching = {
+            disallow_fuzzy_matching = true,
+            disallow_fullfuzzy_matching = true,
+            disallow_partial_fuzzy_matching = true,
+            disallow_partial_matching = true,
+            disallow_prefix_unmatching = true,
         },
         snippet = {
             expand = function (args)
@@ -60,9 +70,14 @@ end
 
 function M.get_sources(cmp)
     return cmp.config.sources({
-        { name = "nvim_lsp" },
+        {
+            name = "nvim_lsp",
+            entry_filter = function (entry, ctx)
+                return require("cmp.types").lsp.CompletionItemKind[entry:get_kind()] ~= "Text"
+            end,
+        },
         { name = "luasnip" },
-        { name = "nvim_lua" },
+        -- { name = "nvim_lua" },
         { name = "nvim_lsp_signature_help" },
     })
 end

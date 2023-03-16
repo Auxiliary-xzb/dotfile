@@ -28,6 +28,9 @@ vim.api.nvim_create_autocmd("FileType", {
         -- tab的宽度为2
         vim.api.nvim_buf_set_option(info.buf, "softtabstop", 2)
         vim.api.nvim_buf_set_option(info.buf, "shiftwidth", 2)
+
+        -- 高亮第80列
+        vim.wo.colorcolumn = "80"
     end,
 })
 
