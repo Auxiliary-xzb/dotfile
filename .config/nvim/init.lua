@@ -6,6 +6,9 @@ if untils.whether_disable_netrw() == true then
     vim.g.loaded_netrwPlugin = 1
 end
 
+--vim.o.verbosefile = vim.env.HOME .. "/nvim_verbose"
+--vim.o.verbose = 13
+
 -- basic option setting
 require("user.core.options")
 require("user.core.keybindings")

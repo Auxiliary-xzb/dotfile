@@ -43,7 +43,7 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_buf_set_option(info.buf, "autoindent", false)
         vim.api.nvim_buf_set_option(info.buf, "smartindent", false)
         vim.api.nvim_buf_set_option(info.buf, "cindent", false)
-        vim.api.nvim_buf_set_option(info.buf, "indentexpr", false)
+        vim.api.nvim_buf_set_option(info.buf, "indentexpr", "")
     end,
 })
 
