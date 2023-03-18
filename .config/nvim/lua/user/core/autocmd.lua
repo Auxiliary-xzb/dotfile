@@ -7,8 +7,6 @@ vim.api.nvim_create_autocmd("BufWrite", {
         local currentPosition = vim.api.nvim_win_get_cursor(0)
         -- 删除行尾空白符
         vim.cmd("silent %s/\\s*$//g")
-        -- 替换Tab为空格
-        vim.cmd("silent %retab!")
         vim.api.nvim_win_set_cursor(0, currentPosition)
     end,
 })

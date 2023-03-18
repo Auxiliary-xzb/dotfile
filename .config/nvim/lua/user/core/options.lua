@@ -1,8 +1,16 @@
--- 仅使用空格模式, 不替换<Tab>的实际长度，替换其他涉及<Tab>的动作使用的长度
--- 仅控制新创建文件，保持旧文件的tab长度，仅将其替换为空白。
+-- 使用空白替换空白符，只影响由vim执行的tab操作。
 vim.opt.expandtab = true
+-- 开启时行首的tab使用shiftwidth，行首删除时也会使用shiftwidth，其他地方使用tabstop。
+-- 关闭时总是使用tabstop，shiftwidth只有在是使用">>"进行格式化时才使用
+-- tab最终会被插入为tab还是space取决与expandtab
+vim.opt.smarttab = true
+-- 实际执行插入tab操作时，tab所代表的多少个space的位宽，
 vim.opt.softtabstop = 4
+-- 首部空白(indent)的宽度，它应该和插入tab的space位宽相同，不然会很奇怪
 vim.opt.shiftwidth = 4
+-- 表示显示tab时使用的space位宽，为了保证读取文件的正确，应该将tab的显示
+-- 位宽保持默认的8个符号位。
+-- vim.opt.tabstop = 8
 
 -- 设置显示行号, 显示相对行号
 vim.opt.number = true
@@ -77,3 +85,6 @@ vim.opt.signcolumn = "yes:1"
 
 -- 所有的popmenu的最大高度为10行
 vim.opt.pumheight = 10
+
+-- 设置单一的stausline，而不是每个窗口一个
+vim.opt.laststatus = 3
