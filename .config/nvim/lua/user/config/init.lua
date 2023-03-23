@@ -9,6 +9,7 @@ local plugins = {
     ["trouble"] = true,
     ["toggleterm"] = true,
     ["todo-comments"] = true,
+    ["peek"] = true,
 }
 
 local config_dir = vim.fn.stdpath("config") .. "/lua/user/config"
